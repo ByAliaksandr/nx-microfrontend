@@ -3,20 +3,16 @@ import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './home/home.component';
 
-
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
   // { path: 'mfe1-home', component: HomeComponent },
   // { path: 'mfe2-home', component: HomeComponent }
-  { path: '',   redirectTo: '/home', pathMatch: 'full' }
+  { path: '', redirectTo: '/home', pathMatch: 'full' }
 ];
 
 @NgModule({
   declarations: [],
-  imports: [
-    [RouterModule.forRoot(routes)],
-    CommonModule
-  ],
+  imports: [[RouterModule.forRoot(routes)], CommonModule],
   exports: [RouterModule]
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}
