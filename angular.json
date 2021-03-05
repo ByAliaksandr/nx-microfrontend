@@ -180,7 +180,7 @@
       "prefix": "nx-microfrontend",
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-angular:browser",
+          "builder": "ngx-build-plus:browser",
           "options": {
             "outputPath": "dist/apps/mfe1",
             "index": "apps/mfe1/src/index.html",
@@ -195,7 +195,8 @@
             "styles": [
               "apps/mfe1/src/styles.scss"
             ],
-            "scripts": []
+            "scripts": [],
+            "extraWebpackConfig": "apps/mfe1/webpack.config.js"
           },
           "configurations": {
             "production": {
@@ -223,18 +224,22 @@
                   "maximumWarning": "6kb",
                   "maximumError": "10kb"
                 }
-              ]
+              ],
+              "extraWebpackConfig": "apps/mfe1/webpack.prod.config.js"
             }
           }
         },
         "serve": {
-          "builder": "@angular-devkit/build-angular:dev-server",
+          "builder": "ngx-build-plus:dev-server",
           "options": {
-            "browserTarget": "mfe1:build"
+            "browserTarget": "mfe1:build",
+            "extraWebpackConfig": "apps/mfe1/webpack.config.js",
+            "port": 3000
           },
           "configurations": {
             "production": {
-              "browserTarget": "mfe1:build:production"
+              "browserTarget": "mfe1:build:production",
+              "extraWebpackConfig": "apps/mfe1/webpack.prod.config.js"
             }
           }
         },
@@ -254,13 +259,14 @@
           }
         },
         "test": {
-          "builder": "@nrwl/jest:jest",
+          "builder": "ngx-build-plus:karma",
           "outputs": [
             "coverage/apps/mfe1"
           ],
           "options": {
             "jestConfig": "apps/mfe1/jest.config.js",
-            "passWithNoTests": true
+            "passWithNoTests": true,
+            "extraWebpackConfig": "apps/mfe1/webpack.config.js"
           }
         }
       }
