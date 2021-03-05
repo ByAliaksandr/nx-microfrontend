@@ -9,7 +9,7 @@ sharedMappings.register(path.join(__dirname, '../../tsconfig.base.json'), [
 
 module.exports = {
   output: {
-    uniqueName: 'shell',
+    uniqueName: 'mfe2',
   },
   optimization: {
     // Only needed to bypass a temporary bug
@@ -17,17 +17,19 @@ module.exports = {
   },
   plugins: [
     new ModuleFederationPlugin({
-      // For hosts (please adjust)
-      remotes: {
-        mfe1: 'mfe1@http://localhost:3000/remoteEntry.js',
-        mfe2: 'mfe2@http://localhost:4000/remoteEntry.js',
+      // For remotes (please adjust)
+      name: 'mfe2',
+      filename: 'remoteEntry.js',
+      exposes: {
+        './App': './apps/mfe2/src/main.tsx',
       },
 
       shared: {
         '@angular/core': { singleton: true, strictVersion: true },
         '@angular/common': { singleton: true, strictVersion: true },
         '@angular/router': { singleton: true, strictVersion: true },
-
+        react: { singleton: true, strictVersion: true },
+        'react-dom': { singleton: true, strictVersion: true },
         ...sharedMappings.getDescriptors(),
       },
     }),
